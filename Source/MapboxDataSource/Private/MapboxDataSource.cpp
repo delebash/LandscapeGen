@@ -227,8 +227,8 @@ void UMapboxDataSource::RequestSectionRGBHeight(float upperLat, float leftLon, f
 void UMapboxDataSource::Start(FString URL, FMapboxRequestData data)
 {
 	// Create the Http request and add to pending request list
-	TSharedRef<IHttpRequest> HttpRequest = FHttpModule::Get().CreateRequest();
-	
+	TSharedRef<IHttpRequest, ESPMode::ThreadSafe> HttpRequest = FHttpModule::Get().CreateRequest();
+
 	UE_LOG(LogTemp, Log, TEXT("Sent Request: %s"), *URL);
 	
 	HttpRequest->OnProcessRequestComplete().BindUObject(this, &UMapboxDataSource::HandleMapboxRequest, data);
